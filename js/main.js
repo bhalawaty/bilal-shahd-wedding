@@ -1,5 +1,5 @@
 /* ============================================
-   عقد القران — Bilal & Shahed
+   عقد القران — Bilal & Shahd
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'BEGIN:VEVENT',
       'DTSTART:20260606T200000',
       'DTEND:20260606T220000',
-      'SUMMARY:Bilal & Shahed — Marriage Ceremony',
+      'SUMMARY:Bilal & Shahd — Marriage Ceremony',
       'LOCATION:Masjid Al-Quds',
       'END:VEVENT',
       'END:VCALENDAR'
