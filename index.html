@@ -6,7 +6,7 @@
   <title>Bilal & Shahd — Marriage Ceremony</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Tajawal:wght@300;400;500;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -29,6 +29,7 @@
         </div>
       </div>
 
+      <p class="opening-hint-ar">اضغط لتفتح</p>
       <p class="opening-hint">Tap to open</p>
     </div>
 
@@ -101,7 +102,9 @@
 
         <div class="hero-line"></div>
 
-        <p class="hero-date">6 June 2026</p>
+        <p class="hero-date-ar">١٢ يونيو ٢٠٢٦</p>
+        <p class="hero-date">12 June 2026</p>
+        <p class="hero-venue-hint-ar">مسجد القدس</p>
         <p class="hero-venue-hint">Masjid Al-Quds</p>
       </div>
 
@@ -113,26 +116,32 @@
     <!-- COUNTDOWN -->
     <section class="section countdown-section">
       <div class="container">
+        <p class="heading-arabic">العد التنازلي</p>
         <h2 class="heading-script">Countdown</h2>
+        <p class="subtitle-arabic">حتى أجمل يومٍ في حياتنا</p>
         <p class="subtitle-light">Until the most special day of our lives</p>
         <div class="countdown" id="countdown">
           <div class="cd-unit">
             <span class="cd-num" id="days">0</span>
+            <span class="cd-label-ar">أيام</span>
             <span class="cd-label">Days</span>
           </div>
           <div class="cd-sep">:</div>
           <div class="cd-unit">
             <span class="cd-num" id="hours">0</span>
+            <span class="cd-label-ar">ساعات</span>
             <span class="cd-label">Hours</span>
           </div>
           <div class="cd-sep">:</div>
           <div class="cd-unit">
             <span class="cd-num" id="minutes">0</span>
+            <span class="cd-label-ar">دقائق</span>
             <span class="cd-label">Minutes</span>
           </div>
           <div class="cd-sep">:</div>
           <div class="cd-unit">
             <span class="cd-num" id="seconds">0</span>
+            <span class="cd-label-ar">ثوانٍ</span>
             <span class="cd-label">Seconds</span>
           </div>
         </div>
@@ -142,6 +151,7 @@
     <!-- WELCOME -->
     <section class="section welcome-section">
       <div class="container fade-in">
+        <p class="heading-arabic heading-arabic-dark">أهلاً وسهلاً</p>
         <h2 class="heading-script">Welcome</h2>
         <p class="body-text">
           We warmly invite you to attend our marriage ceremony.
@@ -156,7 +166,9 @@
     <!-- DETAILS -->
     <section class="section details-section">
       <div class="container">
+        <p class="heading-arabic heading-arabic-dark">التفاصيل</p>
         <h2 class="heading-script">Details</h2>
+        <p class="subtitle-arabic subtitle-arabic-dark">كل ما تحتاج معرفته</p>
         <p class="subtitle-muted">Everything you need to know</p>
 
         <div class="detail-row">
@@ -167,8 +179,8 @@
               <line x1="8" y1="2" x2="8" y2="6"/>
               <line x1="3" y1="10" x2="21" y2="10"/>
             </svg>
-            <h3>Saturday, 6 June 2026</h3>
-            <p>السبت ١٠ ذو القعدة ١٤٤٨</p>
+            <h3>Friday, 12 June 2026</h3>
+            <p>الجمعة ٢٦ ذو القعدة ١٤٤٧</p>
           </div>
 
           <div class="detail-item fade-in">
@@ -195,6 +207,7 @@
     <!-- PROGRAM -->
     <section class="section program-section">
       <div class="container">
+        <p class="heading-arabic heading-arabic-dark">البرنامج</p>
         <h2 class="heading-script">Program</h2>
 
         <div class="timeline">
@@ -203,7 +216,7 @@
             <div class="tl-body">
               <span class="tl-time">7:30 PM</span>
               <h3>Salat Al-Isha</h3>
-              <p>صلاة العشاء</p>
+              <p class="tl-ar">صلاة العشاء</p>
             </div>
           </div>
 
@@ -211,7 +224,7 @@
             <div class="tl-dot"></div>
             <div class="tl-body">
               <span class="tl-time">8:00 PM</span>
-              <h3>عقد القران</h3>
+              <h3 class="tl-ar">عقد القران</h3>
               <p>The marriage ceremony</p>
             </div>
           </div>
@@ -241,7 +254,9 @@
         <div class="venue-hero-overlay"></div>
       </div>
       <div class="venue-hero-content">
+        <p class="heading-arabic">المكان</p>
         <h2 class="heading-script venue-heading">The Venue</h2>
+        <p class="venue-where-ar">حيث نجتمع</p>
         <p class="venue-where">Where we gather</p>
         <div class="venue-gold-line"></div>
         <h3 class="venue-name-big">Masjid Al-Quds</h3>
@@ -259,10 +274,12 @@
         </div>
         <div class="venue-actions">
           <a href="https://maps.app.goo.gl/MV6PyL5cXJdAAw7q9" target="_blank" rel="noopener" class="btn btn-gold">
-            Open in Maps
+            <span class="btn-ar">افتح في الخرائط</span>
+            <span class="btn-en">Open in Maps</span>
           </a>
           <button class="btn btn-gold-outline" id="add-calendar">
-            Add to Calendar
+            <span class="btn-ar">أضف إلى التقويم</span>
+            <span class="btn-en">Add to Calendar</span>
           </button>
         </div>
       </div>
@@ -272,7 +289,7 @@
     <footer class="footer">
       <div class="footer-line"></div>
       <p class="footer-names">Bilal & Shahd</p>
-      <p class="footer-date">06 . 06 . 2026</p>
+      <p class="footer-date">12 . 06 . 2026</p>
     </footer>
 
   </main>

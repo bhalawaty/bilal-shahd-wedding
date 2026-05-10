@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ─── COUNTDOWN ─────────────────────────────
-  const weddingDate = new Date('2026-06-06T20:00:00').getTime();
+  const weddingDate = new Date('2026-06-12T20:00:00').getTime();
 
   function updateCountdown() {
     const dist = weddingDate - Date.now();
@@ -116,8 +116,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
       'BEGIN:VEVENT',
-      'DTSTART:20260606T200000',
-      'DTEND:20260606T220000',
+      'DTSTART:20260612T200000',
+      'DTEND:20260612T220000',
       'SUMMARY:Bilal & Shahd — Marriage Ceremony',
       'LOCATION:Masjid Al-Quds',
       'END:VEVENT',
