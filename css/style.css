@@ -319,16 +319,7 @@ body {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(ellipse 70% 55% at 50% 50%,
-      rgba(35, 22, 14, 0.45) 0%,
-      rgba(35, 22, 14, 0.25) 50%,
-      rgba(35, 22, 14, 0.08) 100%),
-    linear-gradient(180deg,
-      rgba(30, 22, 16, 0.2) 0%,
-      transparent 30%,
-      transparent 70%,
-      rgba(30, 22, 16, 0.3) 100%);
+  background: transparent;
   z-index: 2;
 }
 
