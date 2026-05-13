@@ -1542,11 +1542,13 @@ body {
   background: rgba(201, 169, 110, 0.15);
 }
 
-/* The footer date gets a subtle hint of being interactive on hover (only for those who notice) */
-.footer-date {
+/* Footer date + names are the secret triggers — subtle hover hint only */
+.footer-date,
+.footer-names {
   cursor: default;
   user-select: none;
-  transition: color 0.4s ease;
+  transition: color 0.4s ease, text-shadow 0.4s ease;
 }
 
 .footer-date:hover { color: var(--gold); }
+.footer-names:hover { text-shadow: 0 0 24px rgba(201, 169, 110, 0.5); }

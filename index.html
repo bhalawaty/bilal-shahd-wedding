@@ -298,7 +298,7 @@
     <!-- FOOTER -->
     <footer class="footer">
       <div class="footer-line"></div>
-      <p class="footer-names">Bilal & Shahd</p>
+      <p class="footer-names" id="footer-names">Bilal & Shahd</p>
       <p class="footer-date" id="footer-date" data-x="1745539200">12 . 06 . 2026</p>
 
       <div class="footer-credit">
@@ -325,16 +325,18 @@
         </svg>
       </div>
       <p class="secret-gate-title">A locked heart</p>
+      <p class="secret-gate-hint-ar">أدخلي التاريخ الذي بدأ به كلّ شيء</p>
       <p class="secret-gate-hint">Enter the date it all began</p>
       <form class="secret-gate-form" id="secret-form" autocomplete="off">
         <input
           type="text"
-          inputmode="numeric"
+          inputmode="text"
           class="secret-gate-input"
           id="secret-input"
           placeholder="DD-MM-YYYY"
-          maxlength="10"
+          maxlength="12"
           autocomplete="off"
+          autocapitalize="off"
           spellcheck="false"
           aria-label="Password"/>
         <button type="submit" class="secret-gate-btn">

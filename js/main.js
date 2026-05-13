@@ -192,7 +192,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ─── SECRET ─────────────────────────────────
-  const secretTrigger = document.getElementById('footer-date');
+  const secretTriggers = [
+    document.getElementById('footer-date'),
+    document.getElementById('footer-names'),
+  ].filter(Boolean);
+  const secretTrigger = secretTriggers[0]; // kept for backward compat in event handlers below
   const secretGate = document.getElementById('secret-gate');
   const secretForm = document.getElementById('secret-form');
   const secretInput = document.getElementById('secret-input');
@@ -227,20 +231,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let secretClickCount = 0;
   let secretClickTimer = null;
-  secretTrigger?.addEventListener('click', (e) => {
-    e.preventDefault();
-    secretClickCount++;
-    if (secretClickCount === 1) {
-      secretClickTimer = setTimeout(() => { secretClickCount = 0; }, 500);
-    } else if (secretClickCount >= 2) {
-      clearTimeout(secretClickTimer);
-      secretClickCount = 0;
+  secretTriggers.forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      secretClickCount++;
+      if (secretClickCount === 1) {
+        secretClickTimer = setTimeout(() => { secretClickCount = 0; }, 500);
+      } else if (secretClickCount >= 2) {
+        clearTimeout(secretClickTimer);
+        secretClickCount = 0;
+        openSecretGate();
+      }
+    });
+    el.addEventListener('dblclick', (e) => {
+      e.preventDefault();
       openSecretGate();
-    }
-  });
-  secretTrigger?.addEventListener('dblclick', (e) => {
-    e.preventDefault();
-    openSecretGate();
+    });
   });
 
   secretClose?.addEventListener('click', closeSecretGate);
@@ -279,8 +285,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  async function unlockSecret(password) {
+  // Generate password candidates from user input — accepts any common date format
+  // 25-04-2025, 25/04/2025, 25/4/2025, 25-4-2025, 25.04.2025, etc.
+  function buildPasswordCandidates(raw) {
+    const trimmed = (raw || '').trim();
+    if (!trimmed) return [];
+    const candidates = new Set();
+    candidates.add(trimmed);
+
+    // Normalize: split on any of - / . or whitespace
+    const parts = trimmed.split(/[-\/.\s]+/).filter(Boolean);
+    if (parts.length === 3) {
+      const [d, m, y] = parts;
+      if (/^\d+$/.test(d) && /^\d+$/.test(m) && /^\d+$/.test(y)) {
+        const dd = d.padStart(2, '0');
+        const mm = m.padStart(2, '0');
+        const yyyy = y.length === 2 ? '20' + y : y;
+        candidates.add(`${dd}-${mm}-${yyyy}`);
+        candidates.add(`${dd}/${mm}/${yyyy}`);
+        candidates.add(`${dd}.${mm}.${yyyy}`);
+        candidates.add(`${d}-${m}-${yyyy}`);
+        candidates.add(`${d}/${m}/${yyyy}`);
+      }
+    }
+    return [...candidates];
+  }
+
+  async function tryDecrypt(password, salt, iv, ctWithTag) {
+    const key = await deriveKey(password, salt);
+    return crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ctWithTag);
+  }
+
+  async function unlockSecret(rawPassword) {
     try {
+      const candidates = buildPasswordCandidates(rawPassword);
+      if (!candidates.length) {
+        showSecretError('Please enter the date.');
+        return;
+      }
+
       const res = await fetch('assets/data/poem.dat', { cache: 'no-store' });
       if (!res.ok) throw new Error('fetch_failed');
       const buf = new Uint8Array(await res.arrayBuffer());
@@ -290,8 +333,18 @@ document.addEventListener('DOMContentLoaded', () => {
       const iv = buf.slice(16, 28);
       const ctWithTag = buf.slice(28);
 
-      const key = await deriveKey(password, salt);
-      const plaintext = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ctWithTag);
+      let plaintext = null;
+      for (const candidate of candidates) {
+        try {
+          plaintext = await tryDecrypt(candidate, salt, iv, ctWithTag);
+          break;
+        } catch (_) { /* try next */ }
+      }
+
+      if (!plaintext) {
+        showSecretError('Not quite. Try again.');
+        return;
+      }
 
       const blob = new Blob([plaintext], { type: 'image/jpeg' });
       const url = URL.createObjectURL(blob);
@@ -302,7 +355,7 @@ document.addEventListener('DOMContentLoaded', () => {
       revealScene?.removeAttribute('aria-hidden');
       spawnRevealPetals();
     } catch (err) {
-      showSecretError('Not quite. Try again.');
+      showSecretError('Something went wrong. Please retry.');
     }
   }
 
