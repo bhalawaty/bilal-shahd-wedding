@@ -94,6 +94,22 @@ body {
   object-fit: cover;
   position: absolute;
   inset: 0;
+  pointer-events: none;
+}
+
+/* Hide all native video controls on every browser */
+.hero-video::-webkit-media-controls,
+.hero-video::-webkit-media-controls-panel,
+.hero-video::-webkit-media-controls-play-button,
+.hero-video::-webkit-media-controls-start-playback-button,
+.hero-video::-webkit-media-controls-overlay-play-button,
+.verse-video::-webkit-media-controls,
+.verse-video::-webkit-media-controls-panel,
+.verse-video::-webkit-media-controls-play-button,
+.verse-video::-webkit-media-controls-start-playback-button,
+.verse-video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+  -webkit-appearance: none;
 }
 
 .opening-img {

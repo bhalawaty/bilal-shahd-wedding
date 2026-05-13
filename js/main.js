@@ -40,6 +40,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroVideo = document.getElementById('hero-video');
 
   document.querySelectorAll('video').forEach(video => {
+    // Belt-and-suspenders: force-disable any native control surface
+    video.controls = false;
+    video.removeAttribute('controls');
+    video.muted = true;
+    video.playsInline = true;
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+
     video.addEventListener('loadeddata', () => video.classList.add('loaded'));
     video.addEventListener('canplay', () => {
       video.play().catch(() => {});
