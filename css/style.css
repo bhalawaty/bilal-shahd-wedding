@@ -179,6 +179,8 @@ body {
     0 2px 16px rgba(0,0,0,0.7);
   opacity: 1;
   margin-bottom: -14px;
+  cursor: pointer;
+  user-select: none;
 }
 
 .opening-hint {
@@ -189,6 +191,8 @@ body {
   letter-spacing: 4px;
   text-shadow: 0 2px 16px rgba(0,0,0,0.5);
   animation: fade-pulse 2.5s ease-in-out infinite;
+  cursor: pointer;
+  user-select: none;
 }
 
 @keyframes fade-pulse {

@@ -49,16 +49,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.body.style.overflow = 'hidden';
 
-  seal.addEventListener('click', () => {
-    // Start music immediately on tap
+  let invitationOpened = false;
+  function openInvitation() {
+    if (invitationOpened) return;
+    invitationOpened = true;
+
     startMusic();
 
-    // Animate seal
     seal.style.transition = 'transform 0.6s cubic-bezier(.4,0,.2,1), opacity 0.6s ease';
     seal.style.transform = 'scale(1.5)';
     seal.style.opacity = '0';
 
-    // Fade out opening, reveal invitation
     setTimeout(() => {
       envelopeScreen.classList.add('opening');
       invitation.classList.remove('hidden');
@@ -69,7 +70,11 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => { envelopeScreen.style.display = 'none'; }, 800);
       }, 300);
     }, 600);
-  });
+  }
+
+  seal.addEventListener('click', openInvitation);
+  document.querySelector('.opening-hint-ar')?.addEventListener('click', openInvitation);
+  document.querySelector('.opening-hint')?.addEventListener('click', openInvitation);
 
   // ─── COUNTDOWN ─────────────────────────────
   const weddingDate = new Date('2026-06-12T20:00:00').getTime();
