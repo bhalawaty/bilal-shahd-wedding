@@ -122,6 +122,16 @@ document.addEventListener('DOMContentLoaded', () => {
     else scrollIndicator.classList.remove('hidden-fade');
   }, { passive: true });
 
+  scrollIndicator?.addEventListener('click', () => {
+    const heroEl = document.querySelector('.hero');
+    const nextSection = heroEl?.nextElementSibling;
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+    }
+  });
+
   // ─── COUNTDOWN ─────────────────────────────
   const weddingDate = new Date('2026-06-12T20:00:00').getTime();
 
