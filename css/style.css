@@ -319,7 +319,7 @@ body {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: transparent;
+  background: rgba(30, 22, 16, 0.15);
   z-index: 2;
 }
 
