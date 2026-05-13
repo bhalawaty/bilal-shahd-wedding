@@ -387,6 +387,47 @@ document.addEventListener('DOMContentLoaded', () => {
     revealScene?.setAttribute('aria-hidden', 'true');
   });
 
+  // ─── SHARE BUTTON ─────────────────────────
+  const shareBtn = document.getElementById('share-btn');
+  const shareToast = document.getElementById('share-toast');
+
+  function flashToast(text) {
+    if (!shareToast) return;
+    shareToast.textContent = text;
+    shareToast.classList.add('show');
+    setTimeout(() => shareToast.classList.remove('show'), 2200);
+  }
+
+  shareBtn?.addEventListener('click', async () => {
+    const shareData = {
+      title: 'Bilal & Shahd — Marriage Ceremony',
+      text: 'You are warmly invited to our marriage ceremony — Friday, 12 June 2026 at Masjid Al-Quds.',
+      url: 'https://wedding.elhalawaty.online/',
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (_) { /* user dismissed */ }
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(shareData.url);
+      flashToast('Link copied ✓');
+    } catch (_) {
+      const ta = document.createElement('textarea');
+      ta.value = shareData.url;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); flashToast('Link copied ✓'); }
+      catch (_) { flashToast('Copy failed — long-press to copy'); }
+      document.body.removeChild(ta);
+    }
+  });
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       if (!revealScene?.classList.contains('hidden')) revealClose?.click();

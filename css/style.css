@@ -1140,6 +1140,61 @@ body {
    AUDIO TOGGLE
    ============================================ */
 
+/* ─── Share button — sits above audio toggle ─── */
+.share-btn {
+  position: fixed;
+  bottom: 76px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(201, 169, 110, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--brown);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  z-index: 1001;
+}
+
+.share-btn:hover {
+  background: var(--gold);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 24px rgba(201, 169, 110, 0.5);
+}
+
+.share-btn:active { transform: scale(0.95); }
+
+.share-toast {
+  position: fixed;
+  bottom: 130px;
+  right: 20px;
+  padding: 10px 16px;
+  background: rgba(30, 22, 16, 0.92);
+  color: var(--gold-light);
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 1px;
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  border-radius: 22px;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  z-index: 1002;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.share-toast.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 .audio-toggle {
   position: fixed;
   bottom: 20px;
