@@ -37,10 +37,25 @@ document.addEventListener('DOMContentLoaded', () => {
   audioToggle.addEventListener('click', toggleMusic);
 
   // ─── VIDEO LOADING ─────────────────────────
+  const heroVideo = document.getElementById('hero-video');
+
   document.querySelectorAll('video').forEach(video => {
     video.addEventListener('loadeddata', () => video.classList.add('loaded'));
+    video.addEventListener('canplay', () => {
+      video.play().catch(() => {});
+    });
     video.addEventListener('error', () => { video.style.display = 'none'; });
   });
+
+  function forcePlayHeroVideo() {
+    if (!heroVideo) return;
+    const tryPlay = () => heroVideo.play().catch(() => {});
+    tryPlay();
+    if (heroVideo.readyState < 3) {
+      heroVideo.load();
+      heroVideo.addEventListener('canplay', tryPlay, { once: true });
+    }
+  }
 
   // ─── OPENING SCREEN ───────────────────────
   const envelopeScreen = document.getElementById('envelope-screen');
@@ -55,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     invitationOpened = true;
 
     startMusic();
+    forcePlayHeroVideo();
 
     seal.style.transition = 'transform 0.6s cubic-bezier(.4,0,.2,1), opacity 0.6s ease';
     seal.style.transform = 'scale(1.5)';
