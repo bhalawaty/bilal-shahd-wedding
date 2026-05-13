@@ -500,12 +500,12 @@ body {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  color: var(--gold);
+  color: var(--sage-dark);
   pointer-events: none;
   animation: scroll-bounce 2s ease-in-out infinite;
   transition: opacity 0.6s ease;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-  filter: drop-shadow(0 0 12px rgba(201, 169, 110, 0.35));
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5), 0 2px 8px rgba(0, 0, 0, 0.35);
+  filter: drop-shadow(0 0 10px rgba(125, 139, 105, 0.4));
 }
 
 .scroll-indicator.hidden-fade {
@@ -518,7 +518,7 @@ body {
   font-weight: 700;
   letter-spacing: 2px;
   direction: rtl;
-  color: var(--gold-light);
+  color: var(--sage-dark);
 }
 
 .scroll-text {
@@ -527,7 +527,7 @@ body {
   font-weight: 600;
   letter-spacing: 5px;
   text-transform: uppercase;
-  color: var(--gold-light);
+  color: var(--sage-dark);
 }
 
 .scroll-icon {
@@ -538,7 +538,7 @@ body {
 }
 
 .scroll-icon svg {
-  color: var(--gold);
+  color: var(--sage-dark);
 }
 
 @keyframes scroll-bounce {
@@ -1215,3 +1215,329 @@ body {
   .seal-initials { font-size: 22px; }
   .cd-num { font-size: 32px; }
 }
+
+/* ============================================
+   SECRET — FOR HER
+   ============================================ */
+
+.secret-gate.hidden,
+.reveal-scene.hidden { display: none !important; }
+
+.secret-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: secret-fade-in 0.5s ease;
+}
+
+.secret-gate-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgba(40, 25, 18, 0.85) 0%, rgba(15, 10, 7, 0.96) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.secret-gate-card {
+  position: relative;
+  z-index: 2;
+  max-width: 380px;
+  width: 100%;
+  background: linear-gradient(160deg, rgba(40, 28, 22, 0.95) 0%, rgba(25, 18, 14, 0.95) 100%);
+  border: 1px solid rgba(201, 169, 110, 0.25);
+  border-radius: 18px;
+  padding: 36px 28px 28px;
+  text-align: center;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(201, 169, 110, 0.1);
+  animation: secret-card-up 0.6s cubic-bezier(.2, .9, .3, 1);
+}
+
+.secret-gate-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: rgba(201, 169, 110, 0.08);
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  color: var(--gold);
+}
+
+.secret-gate-title-ar {
+  font-family: var(--font-ar);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold);
+  direction: rtl;
+  margin-bottom: 2px;
+}
+
+.secret-gate-title {
+  font-family: var(--font-script);
+  font-size: 28px;
+  color: var(--gold-light);
+  margin-bottom: 18px;
+}
+
+.secret-gate-hint-ar {
+  font-family: var(--font-ar);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white-90);
+  direction: rtl;
+  margin-bottom: 2px;
+  opacity: 0.8;
+}
+
+.secret-gate-hint {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--white-90);
+  margin-bottom: 24px;
+  opacity: 0.75;
+  letter-spacing: 1px;
+}
+
+.secret-gate-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.secret-gate-input {
+  font-family: var(--font-body);
+  font-size: 16px;
+  letter-spacing: 4px;
+  text-align: center;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  border-radius: 10px;
+  color: var(--gold-light);
+  outline: none;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.secret-gate-input::placeholder {
+  color: rgba(212, 184, 138, 0.35);
+  letter-spacing: 4px;
+}
+
+.secret-gate-input:focus {
+  border-color: var(--gold);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.secret-gate-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, var(--gold) 0%, #A3834A 100%);
+  color: var(--brown);
+  border: none;
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.secret-gate-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(201, 169, 110, 0.3);
+}
+
+.secret-gate-error {
+  min-height: 18px;
+  margin-top: 10px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: #D67878;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.secret-gate-error.show { opacity: 1; }
+
+.secret-gate-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  color: var(--gold-light);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.secret-gate-close:hover { opacity: 1; transform: scale(1.1); }
+
+.secret-shake { animation: secret-shake 0.4s ease; }
+
+@keyframes secret-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes secret-card-up {
+  from { opacity: 0; transform: translateY(20px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+
+@keyframes secret-shake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-8px); }
+  75%      { transform: translateX(8px); }
+}
+
+/* ─── REVEAL SCENE ─── */
+.reveal-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow-y: auto;
+  animation: secret-fade-in 1s ease;
+}
+
+.reveal-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(125, 139, 105, 0.35) 0%, transparent 55%),
+    radial-gradient(ellipse at 70% 80%, rgba(201, 169, 110, 0.25) 0%, transparent 55%),
+    linear-gradient(165deg, #2B1F18 0%, #1A1310 100%);
+}
+
+.reveal-petals {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.reveal-petals .petal {
+  position: absolute;
+  border-radius: 50% 0 50% 50%;
+  will-change: transform, opacity;
+  animation: petal-fall var(--dur, 7s) ease-in-out infinite var(--delay, 0s);
+}
+
+.reveal-content {
+  position: relative;
+  z-index: 2;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  padding: 40px 28px;
+  animation: secret-card-up 1s cubic-bezier(.2, .9, .3, 1);
+}
+
+.reveal-frame {
+  width: clamp(220px, 60vw, 320px);
+  margin: 0 auto 28px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(201, 169, 110, 0.35),
+    0 0 0 8px rgba(201, 169, 110, 0.08);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.reveal-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.reveal-title {
+  font-family: var(--font-script);
+  font-size: clamp(36px, 7vw, 52px);
+  color: var(--gold-light);
+  margin-bottom: 18px;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+.reveal-message-ar {
+  font-family: var(--font-ar);
+  font-weight: 700;
+  font-size: clamp(15px, 3.6vw, 19px);
+  color: var(--white);
+  direction: rtl;
+  line-height: 1.9;
+  margin-bottom: 14px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.reveal-message {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(15px, 3vw, 18px);
+  color: var(--white-90);
+  line-height: 1.7;
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+}
+
+.reveal-signature {
+  font-family: var(--font-script);
+  font-size: 22px;
+  color: var(--gold);
+  margin-top: 12px;
+}
+
+.reveal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  border-radius: 50%;
+  color: var(--gold-light);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 5;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.reveal-close:hover {
+  transform: scale(1.1);
+  background: rgba(201, 169, 110, 0.15);
+}
+
+/* The footer date gets a subtle hint of being interactive on hover (only for those who notice) */
+.footer-date {
+  cursor: default;
+  user-select: none;
+  transition: color 0.4s ease;
+}
+
+.footer-date:hover { color: var(--gold); }
