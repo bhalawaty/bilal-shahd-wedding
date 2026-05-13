@@ -28,6 +28,28 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
+/* ── Arabic text — bold across the entire site ── */
+.opening-arabic,
+.opening-hint-ar,
+.hero-bismillah,
+.hero-label p,
+.hero-date-ar,
+.hero-venue-hint-ar,
+.heading-arabic,
+.subtitle-arabic,
+.body-arabic,
+.cd-label-ar,
+.tl-ar,
+.tl-body h3.tl-ar,
+.tl-body p.tl-ar,
+.verse-arabic,
+.venue-where-ar,
+.venue-name-ar-big,
+.btn-ar,
+.detail-item p {
+  font-weight: 700;
+}
+
 body {
   font-family: var(--font-body);
   background: var(--cream);
@@ -1001,6 +1023,46 @@ body {
   letter-spacing: 6px;
   color: var(--brown-light);
   font-weight: 300;
+}
+
+.footer-credit {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(201, 169, 110, 0.2);
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  color: var(--brown-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  opacity: 0.8;
+}
+
+.footer-credit-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.footer-credit-link:hover {
+  color: var(--brown);
+  transform: translateY(-1px);
+}
+
+.footer-credit-link svg {
+  transition: transform 0.25s ease;
+}
+
+.footer-credit-link:hover svg {
+  transform: scale(1.15);
 }
 
 /* ============================================
