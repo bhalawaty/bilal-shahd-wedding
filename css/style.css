@@ -47,7 +47,7 @@ html { scroll-behavior: smooth; }
 .venue-name-ar-big,
 .btn-ar,
 .detail-item p {
-  font-weight: 700;
+  font-weight: 700 !important;
 }
 
 body {
@@ -225,12 +225,21 @@ body {
 }
 
 /* ── Rose Petals — rich red, abundant ── */
-.floating-petals { position: fixed; inset: 0; pointer-events: none; z-index: 999; }
+.floating-petals {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  contain: layout style paint;
+}
 
 .petal {
   position: absolute;
+  top: 0;
   border-radius: 50% 0 50% 50%;
   opacity: 0;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
   animation: petal-fall var(--dur, 7s) ease-in-out infinite var(--delay, 0s);
 }
 
@@ -278,13 +287,23 @@ body {
 .p35 { left: 78%; --delay: 5.6s;  --dur: 6.5s; }
 
 @keyframes petal-fall {
-  0%   { top: -5%; opacity: 0; transform: rotate(0) translateX(0) scale(1); }
+  0%   { transform: translate3d(0, -5vh, 0) rotate(0) scale(1); opacity: 0; }
   6%   { opacity: 0.75; }
-  20%  { transform: rotate(70deg) translateX(18px) scale(0.95); }
-  40%  { transform: rotate(160deg) translateX(-22px) scale(0.85); opacity: 0.65; }
-  60%  { transform: rotate(240deg) translateX(15px) scale(0.7); opacity: 0.55; }
-  80%  { transform: rotate(320deg) translateX(-12px) scale(0.5); }
-  100% { top: 108%; opacity: 0; transform: rotate(400deg) translateX(8px) scale(0.3); }
+  20%  { transform: translate3d(18px, 21vh, 0) rotate(70deg) scale(0.95); }
+  40%  { transform: translate3d(-22px, 43vh, 0) rotate(160deg) scale(0.85); opacity: 0.65; }
+  60%  { transform: translate3d(15px, 65vh, 0) rotate(240deg) scale(0.7); opacity: 0.55; }
+  80%  { transform: translate3d(-12px, 87vh, 0) rotate(320deg) scale(0.5); }
+  100% { transform: translate3d(8px, 110vh, 0) rotate(400deg) scale(0.3); opacity: 0; }
+}
+
+/* Reduce petal count on small screens for smoother animation */
+@media (max-width: 600px) {
+  .floating-petals .petal:nth-child(n+19) { display: none; }
+}
+
+/* Honor reduced-motion preference for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .petal { animation: none; opacity: 0; }
 }
 
 /* ============================================
@@ -427,7 +446,7 @@ body {
   letter-spacing: clamp(4px, 1.5vw, 10px);
   text-transform: uppercase;
   color: var(--white-90);
-  font-weight: 300;
+  font-weight: 700;
   text-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
@@ -449,7 +468,7 @@ body {
   letter-spacing: 3px;
   text-transform: uppercase;
   margin-top: 2px;
-  font-weight: 400;
+  font-weight: 700;
   text-shadow: 0 2px 16px rgba(0,0,0,0.5);
 }
 
