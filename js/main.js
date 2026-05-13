@@ -92,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         invitation.classList.add('show');
         document.body.style.overflow = 'auto';
         setTimeout(() => { envelopeScreen.style.display = 'none'; }, 800);
+        scheduleScrollHint();
       }, 300);
     }, 600);
   }
@@ -99,6 +100,27 @@ document.addEventListener('DOMContentLoaded', () => {
   seal.addEventListener('click', openInvitation);
   document.querySelector('.opening-hint-ar')?.addEventListener('click', openInvitation);
   document.querySelector('.opening-hint')?.addEventListener('click', openInvitation);
+
+  // ─── SCROLL HINT — gentle page nudge so user knows to scroll ───
+  const scrollIndicator = document.getElementById('scroll-indicator');
+
+  function scheduleScrollHint() {
+    setTimeout(() => {
+      if (window.scrollY > 10) return; // user already scrolled
+      const target = 70;
+      window.scrollTo({ top: target, behavior: 'smooth' });
+      setTimeout(() => {
+        if (window.scrollY > target + 30) return; // user took over
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 900);
+    }, 1800);
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!scrollIndicator) return;
+    if (window.scrollY > 80) scrollIndicator.classList.add('hidden-fade');
+    else scrollIndicator.classList.remove('hidden-fade');
+  }, { passive: true });
 
   // ─── COUNTDOWN ─────────────────────────────
   const weddingDate = new Date('2026-06-12T20:00:00').getTime();
