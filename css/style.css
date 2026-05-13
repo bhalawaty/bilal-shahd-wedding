@@ -1372,14 +1372,16 @@ body {
 }
 
 .secret-gate-error {
-  min-height: 18px;
-  margin-top: 10px;
+  min-height: 22px;
+  margin-top: 14px;
   font-family: var(--font-body);
-  font-size: 12px;
-  letter-spacing: 1.5px;
-  color: #D67878;
+  font-size: 14px;
+  font-style: italic;
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+  color: #E8A4A4;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.25s ease;
 }
 
 .secret-gate-error.show { opacity: 1; }

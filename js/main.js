@@ -221,12 +221,26 @@ document.addEventListener('DOMContentLoaded', () => {
     secretError?.classList.remove('show');
   }
 
+  let secretAttempts = 0;
+  const secretMessages = [
+    'Wrong! You have 3 chances or I will kill you 😢',
+    'Wrong! 2 chances left or I will kill you 😢',
+    'Wrong! Last chance or I will kill you 💔',
+    '💀 You died! Just kidding, my love 🥺❤️ Try again.',
+  ];
+
   function showSecretError(msg) {
     if (!secretError) return;
     secretError.textContent = msg;
     secretError.classList.add('show');
     secretGate.querySelector('.secret-gate-card')?.classList.add('secret-shake');
     setTimeout(() => secretGate.querySelector('.secret-gate-card')?.classList.remove('secret-shake'), 450);
+  }
+
+  function showWrongPasswordMessage() {
+    const idx = Math.min(secretAttempts, secretMessages.length - 1);
+    showSecretError(secretMessages[idx]);
+    secretAttempts++;
   }
 
   let secretClickCount = 0;
@@ -342,10 +356,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (!plaintext) {
-        showSecretError('Not quite. Try again.');
+        showWrongPasswordMessage();
         return;
       }
 
+      secretAttempts = 0; // reset on success
       const blob = new Blob([plaintext], { type: 'image/jpeg' });
       const url = URL.createObjectURL(blob);
 
