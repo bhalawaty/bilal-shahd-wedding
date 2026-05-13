@@ -215,6 +215,19 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => secretGate.querySelector('.secret-gate-card')?.classList.remove('secret-shake'), 450);
   }
 
+  let secretClickCount = 0;
+  let secretClickTimer = null;
+  secretTrigger?.addEventListener('click', (e) => {
+    e.preventDefault();
+    secretClickCount++;
+    if (secretClickCount === 1) {
+      secretClickTimer = setTimeout(() => { secretClickCount = 0; }, 500);
+    } else if (secretClickCount >= 2) {
+      clearTimeout(secretClickTimer);
+      secretClickCount = 0;
+      openSecretGate();
+    }
+  });
   secretTrigger?.addEventListener('dblclick', (e) => {
     e.preventDefault();
     openSecretGate();
