@@ -12,29 +12,54 @@ document.addEventListener('DOMContentLoaded', () => {
   const audioIconOn = document.getElementById('audio-icon-on');
   const audioIconOff = document.getElementById('audio-icon-off');
   let isPlaying = false;
+  // True only when the user has explicitly paused the music; used so we
+  // don't auto-resume after a tab-hide if they intentionally turned it off.
+  let userPaused = false;
 
   function startMusic() {
     bgMusic.play().then(() => {
       isPlaying = true;
+      userPaused = false;
       audioIconOn.classList.remove('hidden');
       audioIconOff.classList.add('hidden');
       audioToggle.classList.add('playing');
     }).catch(() => {});
   }
 
+  function pauseMusic() {
+    bgMusic.pause();
+    isPlaying = false;
+    audioIconOn.classList.add('hidden');
+    audioIconOff.classList.remove('hidden');
+    audioToggle.classList.remove('playing');
+  }
+
   function toggleMusic() {
     if (isPlaying) {
-      bgMusic.pause();
-      isPlaying = false;
-      audioIconOn.classList.add('hidden');
-      audioIconOff.classList.remove('hidden');
-      audioToggle.classList.remove('playing');
+      pauseMusic();
+      userPaused = true;
     } else {
       startMusic();
     }
   }
 
   audioToggle.addEventListener('click', toggleMusic);
+
+  // Pause music when the tab is hidden / phone is locked / window minimized;
+  // resume only if the user hadn't manually paused it.
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      if (isPlaying) pauseMusic();
+    } else if (!userPaused && bgMusic.paused && invitationOpened) {
+      startMusic();
+    }
+  });
+
+  // iOS Safari: pagehide fires reliably when the user leaves the tab or
+  // backgrounds Safari, where visibilitychange may not.
+  window.addEventListener('pagehide', () => {
+    if (isPlaying) pauseMusic();
+  });
 
   // ─── VIDEO LOADING ─────────────────────────
   const heroVideo = document.getElementById('hero-video');
