@@ -753,6 +753,17 @@ body {
   direction: rtl;
 }
 
+.detail-item p.detail-sub {
+  font-family: var(--font-body);
+  font-size: clamp(12px, 2.4vw, 13px);
+  color: var(--brown-light);
+  font-weight: 400;
+  direction: ltr;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
 @media (min-width: 600px) {
   .detail-row {
     flex-direction: row;
