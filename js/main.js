@@ -65,6 +65,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Play the verse-divider video lazily when it scrolls into view.
+  // iOS Safari sometimes blocks initial autoplay for offscreen videos
+  // and renders a media-controls overlay until play() is invoked.
+  const verseVideo = document.getElementById('verse-video');
+  if (verseVideo && 'IntersectionObserver' in window) {
+    const verseObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const tryPlay = () => verseVideo.play().catch(() => {});
+          tryPlay();
+          if (verseVideo.readyState < 3) {
+            verseVideo.load();
+            verseVideo.addEventListener('canplay', tryPlay, { once: true });
+          }
+        } else {
+          verseVideo.pause();
+        }
+      });
+    }, { threshold: 0.1 });
+    verseObserver.observe(verseVideo);
+  }
+
   // ─── OPENING SCREEN ───────────────────────
   const envelopeScreen = document.getElementById('envelope-screen');
   const seal = document.getElementById('wax-seal');

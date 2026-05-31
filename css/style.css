@@ -99,17 +99,27 @@ body {
 
 /* Hide all native video controls on every browser */
 .hero-video::-webkit-media-controls,
+.hero-video::-webkit-media-controls-enclosure,
 .hero-video::-webkit-media-controls-panel,
+.hero-video::-webkit-media-controls-panel-container,
 .hero-video::-webkit-media-controls-play-button,
 .hero-video::-webkit-media-controls-start-playback-button,
 .hero-video::-webkit-media-controls-overlay-play-button,
+.hero-video::-webkit-media-controls-overlay-enclosure,
+.hero-video::-internal-media-controls-overlay-cast-button,
 .verse-video::-webkit-media-controls,
+.verse-video::-webkit-media-controls-enclosure,
 .verse-video::-webkit-media-controls-panel,
+.verse-video::-webkit-media-controls-panel-container,
 .verse-video::-webkit-media-controls-play-button,
 .verse-video::-webkit-media-controls-start-playback-button,
-.verse-video::-webkit-media-controls-overlay-play-button {
+.verse-video::-webkit-media-controls-overlay-play-button,
+.verse-video::-webkit-media-controls-overlay-enclosure,
+.verse-video::-internal-media-controls-overlay-cast-button {
   display: none !important;
   -webkit-appearance: none;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 .opening-img {
@@ -835,6 +845,50 @@ body {
 
 .tl-body p.tl-ar {
   font-weight: 400;
+}
+
+.program-note {
+  margin: 36px auto 0;
+  max-width: 520px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  text-align: left;
+  padding: 18px 22px;
+  background: rgba(201, 169, 110, 0.08);
+  border: 1px solid rgba(201, 169, 110, 0.3);
+  border-left: 3px solid var(--gold);
+  border-radius: 10px;
+}
+
+.program-note svg {
+  flex-shrink: 0;
+  color: var(--gold);
+  margin-top: 2px;
+}
+
+.program-note-text {
+  flex: 1;
+}
+
+.program-note-ar {
+  font-family: var(--font-ar);
+  font-size: clamp(15px, 3vw, 17px);
+  color: var(--brown);
+  direction: rtl;
+  text-align: right;
+  font-weight: 500;
+  line-height: 1.7;
+  margin-bottom: 6px;
+}
+
+.program-note-en {
+  font-family: var(--font-body);
+  font-size: clamp(13px, 2.6vw, 15px);
+  color: var(--brown-light);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.6;
 }
 
 /* ============================================
