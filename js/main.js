@@ -63,9 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ─── VIDEO LOADING ─────────────────────────
   const heroVideo = document.getElementById('hero-video');
+  const verseVideo = document.getElementById('verse-video');
 
   document.querySelectorAll('video').forEach(video => {
-    // Belt-and-suspenders: force-disable any native control surface
     video.controls = false;
     video.removeAttribute('controls');
     video.muted = true;
@@ -77,35 +77,31 @@ document.addEventListener('DOMContentLoaded', () => {
     video.addEventListener('canplay', () => {
       video.play().catch(() => {});
     });
-    video.addEventListener('error', () => { video.style.display = 'none'; });
   });
 
-  function forcePlayHeroVideo() {
-    if (!heroVideo) return;
-    const tryPlay = () => heroVideo.play().catch(() => {});
-    tryPlay();
-    if (heroVideo.readyState < 3) {
-      heroVideo.load();
-      heroVideo.addEventListener('canplay', tryPlay, { once: true });
+  function forcePlayVideo(video) {
+    if (!video) return;
+    const tryPlay = () => video.play().catch(() => {});
+    if (video.readyState < 2) {
+      try { video.load(); } catch (_) {}
     }
+    tryPlay();
+    video.addEventListener('canplay', tryPlay, { once: true });
+  }
+
+  function forcePlayHeroVideo() {
+    forcePlayVideo(heroVideo);
   }
 
   // Play the verse-divider video lazily when it scrolls into view.
-  // iOS Safari sometimes blocks initial autoplay for offscreen videos
-  // and renders a media-controls overlay until play() is invoked.
-  const verseVideo = document.getElementById('verse-video');
+  // (Browsers often suspend autoplay for video elements that start life
+  // inside a display:none subtree — explicitly calling load()+play()
+  // when the section appears guarantees it starts.)
   if (verseVideo && 'IntersectionObserver' in window) {
     const verseObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          const tryPlay = () => verseVideo.play().catch(() => {});
-          tryPlay();
-          if (verseVideo.readyState < 3) {
-            verseVideo.load();
-            verseVideo.addEventListener('canplay', tryPlay, { once: true });
-          }
-        } else {
-          verseVideo.pause();
+          forcePlayVideo(verseVideo);
         }
       });
     }, { threshold: 0.1 });
